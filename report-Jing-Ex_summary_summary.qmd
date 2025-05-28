@@ -1,6 +1,0 @@
----
-title: "Sydney Beach Quality and Safety Assessment Report-Executive summary & Introduction"
-author: "Jingyi Wang"
-format: html
-editor: visual
----
