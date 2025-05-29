@@ -4,4 +4,149 @@ author: "Jingyi Wang"
 format: html
 editor: visual
 ---
+## Load Library
+```{r}
+library(tidyverse)
+```
 
+The data:
+```{r}
+water_quality <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-20/water_quality.csv')
+weather <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-20/weather.csv')
+
+```
+
+```{r}
+start_date <- as.Date("2015-04-28", tz ="Australia/Sydney")
+end_date <- as.Date("2025-04-28", tz ="Australia/Sydney")
+
+water_quality <- water_quality %>%
+  filter(date >= start_date & date <= end_date)
+
+weather <- weather %>%
+  filter(date >= start_date & date <= end_date)
+
+```
+
+Figure:
+```{r}
+top_beaches <- water_quality %>%
+  group_by(swim_site) %>%
+  summarise(avg_enterococci = mean(enterococci_cfu_100ml, na.rm = TRUE)) %>%
+  arrange(desc(avg_enterococci)) %>%
+  slice(1:10)
+```
+
+```{r}
+#| label: fig-bar_chart
+#| fig-cap: "Top 10 Beaches with Worst Water Quality"
+#| echo: false
+
+ggplot(top_beaches, aes(x = reorder(swim_site, avg_enterococci), 
+                        y = avg_enterococci,
+                        fill = reorder(swim_site,
+                                       avg_enterococci))) +  
+  
+  geom_col() +  
+  
+  scale_fill_viridis(discrete = TRUE, 
+                     option = "D", 
+                     direction = -1) +  
+  
+  coord_flip() +
+  
+  labs(title = "Top 10 Beaches with Worst Water Quality",
+       subtitle = "Based on average enterococci levels",
+       x = "Beach",
+       y = "Average Enterococci (CFU/100ml)",
+       caption = "Data source: TidyTuesday") +
+  
+  theme_minimal(base_size = 10) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 13),
+    plot.subtitle = element_text(color = "gray40"),
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black"),
+    legend.position = "none",  # Remove legend
+    panel.grid.major.y = element_blank(),  # Remove horizontal grid lines
+    plot.caption = element_text(color = "gray50", hjust = 0)
+  )
+
+```
+
+
+
+Table:
+```{r}
+# In weather dataset, both latitude and longitude have only unique values.
+weather <- weather %>%
+  select(-latitude, -longitude)
+
+# Merge water and weather datasets by date
+water_weather <- water_quality %>%
+  left_join(weather, by = "date")
+```
+
+```{r}
+water_weather <- water_weather %>%
+  mutate(rain_group = case_when(
+    precipitation_mm == 0 ~ "0 mm",
+    precipitation_mm <= 10 ~ "0–10 mm",
+    TRUE ~ ">10 mm"
+  ))
+
+```
+
+```{r}
+#| label: tbl-rain_table
+#| tbl-cap: Average Enterococci by Rain Group
+
+rain_table <- water_weather %>%
+  group_by(rain_group) %>%
+  summarise(mean_enterococci = mean(enterococci_cfu_100ml, na.rm = TRUE))
+kable(rain_table)
+```
+
+Figure2:
+
+```{r}
+#| label: fig-boxplot
+#| fig-cap: "Boxplot of Enterococci Levels by Rainfall Group"
+
+ggplot(water_weather, 
+       aes(x = rain_group, 
+           y = enterococci_cfu_100ml, 
+           fill = rain_group)) +  
+  geom_boxplot(
+    width = 0.6,                
+    color = "black",            
+    size = 0.5,                 
+    outlier.alpha = 0.5         # Outlier transparency
+  ) +
+  scale_y_log10() +
+  scale_fill_manual(
+    values = c("0 mm" = "#FDE725",    # viridis 浅色（无雨）
+               "0–10 mm" = "#7AD151", # viridis 中等（小雨）
+               ">10 mm" = "#31688E"), # viridis 深色（大雨）
+    breaks = c("0 mm", "0–10 mm", ">10 mm")  # 确保顺序一致
+  ) +
+  labs(
+    title = "Enterococci Levels by Rainfall Group",
+    subtitle = "Log-transformed bacteria concentration (CFU/100ml)",
+    x = "Rainfall Group",
+    y = "Enterococci (CFU/100ml, log10)",
+    caption = "Color intensity reflects rainfall amount"
+  ) +
+  theme_minimal(base_size = 10) +
+  theme(
+    plot.title = element_text(face = "bold", size = 13),
+    plot.subtitle = element_text(color = "gray40"),
+    axis.title = element_text(face = "bold"),
+    legend.position = "none",     # Remove legend
+    panel.grid.major.x = element_blank(), # Remove vertical grid lines
+    panel.grid.minor = element_blank()
+  )
+```
+
+## Result
