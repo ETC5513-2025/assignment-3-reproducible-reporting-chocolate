@@ -1,18 +1,34 @@
 ---
 title: "Sydney Beach Quality and Safety Assessment Report"
 author: "Jingyi Wang"
-format: html
+format:
+  pdf:
+    documentclass: article
+    toc: true
+    number-sections: false  
+    fontsize: 11pt
+    geometry: margin=1in
+    keep-tex: true
+    mainfont: Times New Roman
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3   
+  
 editor: visual
+warning: false
 ---
 
 ## Load Library
 ```{r}
 library(tidyverse)
+library(viridis)
 library(viridisLite)
 library(knitr)
 ```
 
-The data:
+## Data
+
 ```{r}
 water_quality <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-20/water_quality.csv')
 weather <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-20/weather.csv')
@@ -34,7 +50,7 @@ weather <- weather %>%
 
 ## Executive Summary
 
-This report investigates water pollution at public beaches by analysing enterococci levels using environmental and weather data. The findings show that several beaches have extremely high average pollution levels. It poses serious health risks to swimmers. Moreover, enterococci concentrations were significantly higher after rainfall, which suggests that rain events are a strong predictor of poor water quality. These results align with existing studies. We recommend regular monitoring and public reporting of water quality, especially after heavy rainfall. It will help to reduce public health risks and support preventive decision-making.
+This report investigates water pollution at public beaches by analysing enterococci levels using environmental and weather data. The findings show that several beaches have extremely high average pollution levels, which poses serious health risks to swimmers. Moreover, enterococci concentrations were significantly higher after rainfall, which suggests that rain events are a strong predictor of poor water quality. We recommend regular monitoring and public reporting of water quality, especially after heavy rainfall. 
 
 
 ## Introduction
@@ -90,7 +106,7 @@ ggplot(top_beaches, aes(x = reorder(swim_site, avg_enterococci),
   
   theme(
     plot.title = element_text(face = "bold", 
-                              size = 13),
+                              size = 12),
     plot.subtitle = element_text(color = "gray40"),
     axis.title = element_text(face = "bold"),
     axis.text = element_text(color = "black"),
@@ -101,7 +117,7 @@ ggplot(top_beaches, aes(x = reorder(swim_site, avg_enterococci),
 
 ```
 
-Second, we explore the relationship between rainfall and water quality. We merge the two datasets by date and then group the data by rainfall level (0 mm, 0–10 mm, >10 mm). We create a table showing the average enterococci count in each rainfall group. We also make a boxplot to show the distribution of bacteria levels across these groups. Due to extreme values and some zeros in enterococci counts, a log10 transformation was applied to improve the visibility of the boxplot(@fig-boxplot).
+Second, we explore the relationship between rainfall and water quality. We merge the two datasets by date and then group the data by rainfall level (0 mm, 0–10 mm, >10 mm). We create a table(@tbl-rain_table) showing the average enterococci count in each rainfall group. We also make a boxplot to show the distribution of bacteria levels across these groups. Due to extreme values and some zeros in enterococci counts, a log10 transformation was applied to improve the visibility of the boxplot(@fig-boxplot).
 
 ```{r}
 # In weather dataset, both latitude and longitude have only unique values.
@@ -163,7 +179,7 @@ ggplot(water_weather,
   ) +
   theme_minimal(base_size = 10) +
   theme(
-    plot.title = element_text(face = "bold", size = 13),
+    plot.title = element_text(face = "bold", size = 12),
     plot.subtitle = element_text(color = "gray40"),
     axis.title = element_text(face = "bold"),
     legend.position = "none",     # Remove legend
