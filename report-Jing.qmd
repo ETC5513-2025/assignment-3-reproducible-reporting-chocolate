@@ -11,7 +11,7 @@ editor: visual
 library(tidyverse)
 ```
 
-The data:
+## Dataset Description
 
 ```{r}
 water_quality <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-20/water_quality.csv')
@@ -29,10 +29,19 @@ weather <- weather %>%
   filter(date >= start_date & date <= end_date)
 ```
 
+The dataset utilized in this analysis originates from the TidyTuesday project, specifically the release dated May 20, 2025. It encompasses two primary components:
+
+- Water Quality Data
+
+This dataset comprises measurements of enterococci levels, expressed in colony-forming units per 100 milliliters (CFU/100ml), collected from various beaches across New South Wales, Australia. 
+
+- Weather Data
+
+This dataset includes meteorological information.
+
 ## Executive Summary
 
 This report investigates water pollution at public beaches by analysing enterococci levels using environmental and weather data. The findings show that several beaches have extremely high average pollution levels. It poses serious health risks to swimmers. Moreover, enterococci concentrations were significantly higher after rainfall, which suggests that rain events are a strong predictor of poor water quality. These results align with existing studies. We recommend regular monitoring and public reporting of water quality, especially after heavy rainfall. It will help to reduce public health risks and support preventive decision-making.
-
 
 
 ## Introduction
