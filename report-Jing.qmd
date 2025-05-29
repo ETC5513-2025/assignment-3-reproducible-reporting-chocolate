@@ -8,10 +8,8 @@ editor: visual
 ## Load Library
 ```{r}
 library(tidyverse)
-
 library(viridisLite)
 library(knitr)
-
 ```
 
 The data:
@@ -37,7 +35,6 @@ weather <- weather %>%
 ## Executive Summary
 
 This report investigates water pollution at public beaches by analysing enterococci levels using environmental and weather data. The findings show that several beaches have extremely high average pollution levels. It poses serious health risks to swimmers. Moreover, enterococci concentrations were significantly higher after rainfall, which suggests that rain events are a strong predictor of poor water quality. These results align with existing studies. We recommend regular monitoring and public reporting of water quality, especially after heavy rainfall. It will help to reduce public health risks and support preventive decision-making.
-
 
 
 ## Introduction
@@ -92,7 +89,8 @@ ggplot(top_beaches, aes(x = reorder(swim_site, avg_enterococci),
   theme_minimal(base_size = 10) +
   
   theme(
-    plot.title = element_text(face = "bold", size = 13),
+    plot.title = element_text(face = "bold", 
+                              size = 13),
     plot.subtitle = element_text(color = "gray40"),
     axis.title = element_text(face = "bold"),
     axis.text = element_text(color = "black"),
@@ -148,21 +146,20 @@ ggplot(water_weather,
     width = 0.6,                
     color = "black",            
     size = 0.5,                 
-    outlier.alpha = 0.5         # Outlier transparency
+    outlier.alpha = 0.5   # Outlier transparency
   ) +
   scale_y_log10() +
   scale_fill_manual(
-    values = c("0 mm" = "#FDE725",    # viridis 浅色（无雨）
-               "0–10 mm" = "#7AD151", # viridis 中等（小雨）
-               ">10 mm" = "#31688E"), # viridis 深色（大雨）
-    breaks = c("0 mm", "0–10 mm", ">10 mm")  # 确保顺序一致
-  ) +
+    values = c("0 mm" = "#FDE725",    
+               "0–10 mm" = "#7AD151",
+               ">10 mm" = "#31688E"), 
+    breaks = c("0 mm", "0–10 mm", ">10 mm")) +
   labs(
     title = "Enterococci Levels by Rainfall Group",
     subtitle = "Log-transformed bacteria concentration (CFU/100ml)",
     x = "Rainfall Group",
     y = "Enterococci (CFU/100ml, log10)",
-    caption = "Color intensity reflects rainfall amount"
+    caption = "Color intensity reflects rainfall amount. Darker colors indicate higher rainfall."
   ) +
   theme_minimal(base_size = 10) +
   theme(
@@ -199,8 +196,4 @@ To protect public health, the government should test beach water quality more of
 Ackerman, D., & Weisberg, S. B. (2003). Relationship between rainfall and beach bacterial concentrations on Santa Monica Bay beaches. Journal of water and health, 1(2), 85-89.
 
 Colford, J. M., Jr, Schiff, K. C., Griffith, J. F., Yau, V., Arnold, B. F., Wright, C. C., Gruber, J. S., Wade, T. J., Burns, S., Hayes, J., McGee, C., Gold, M., Cao, Y., Noble, R. T., Haugland, R., & Weisberg, S. B. (2012). Using rapid indicators for Enterococcus to assess the risk of illness after exposure to urban runoff contaminated marine water. Water research, 46(7), 2176–2186. https://doi.org/10.1016/j.watres.2012.01.033
-
-
-
-
 
