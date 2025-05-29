@@ -1,0 +1,16 @@
+---
+title: "Sydney Beach Quality and Safety Assessment"
+author: "Jingyi Wang"
+format: 
+  revealjs:
+    theme: simple
+    slide-number: true
+    toc: true
+    toc-depth: 2
+execute:
+  echo: false
+  warning: false
+editor: visual
+---
+
+
