@@ -4,21 +4,20 @@ author: "Jingyi Wang"
 format: html
 editor: visual
 ---
-
 ## Load Library
-
 ```{r}
 library(tidyverse)
+
 library(viridisLite)
 library(knitr)
 
 ```
 
 The data:
-
 ```{r}
 water_quality <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-20/water_quality.csv')
 weather <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-20/weather.csv')
+
 ```
 
 ```{r}
@@ -30,6 +29,7 @@ water_quality <- water_quality %>%
 
 weather <- weather %>%
   filter(date >= start_date & date <= end_date)
+
 ```
 
 
@@ -102,7 +102,7 @@ ggplot(top_beaches, aes(x = reorder(swim_site, avg_enterococci),
 
 ```
 
-Second, we explore the relationship between rainfall and water quality. We merge the two datasets by date and then group the data by rainfall level (0 mm, 0–10 mm, \>10 mm). The @tbl-rain_table shows the average enterococci count in each rainfall group, while a boxplot (@fig-boxplot) illustrates the distribution of bacteria levels across these categories. To account for extreme values and zero enterococci readings, a log10 transformation is applied to enhance the visibility of the boxplot. And rows with zero or missing values were automatically excluded by the plotting function.
+Second, we explore the relationship between rainfall and water quality. We merge the two datasets by date and then group the data by rainfall level (0 mm, 0–10 mm, >10 mm). We create a table showing the average enterococci count in each rainfall group. We also make a boxplot to show the distribution of bacteria levels across these groups. Due to extreme values and some zeros in enterococci counts, a log10 transformation was applied to improve the visibility of the boxplot(@fig-boxplot).
 
 ```{r}
 # In weather dataset, both latitude and longitude have only unique values.
@@ -133,6 +133,7 @@ rain_table <- water_weather %>%
   summarise(mean_enterococci = mean(enterococci_cfu_100ml, na.rm = TRUE))
 kable(rain_table)
 ```
+
 
 ```{r}
 #| label: fig-boxplot
@@ -172,4 +173,20 @@ ggplot(water_weather,
     panel.grid.minor = element_blank()
   )
 ```
+
+## Result
+
+From @fig-bar_chart, the beach with the highest average pollution level is Wentworth Falls Lake - Jetty, with more than 500 CFU/100ml. This is about twice the level of the second-ranked site, Megalong Creek. The other eight beaches in the top 10 also show high pollution, at average values above 100 CFU/100ml. These results suggest that certain beaches consistently have poor water quality from 2015 to 2025.
+
+The @tbl-rain_table shows that beaches with rainfall greater than 10mm had significantly higher enterococci levels compared to those with 0mm rainfall. It suggests a strong relationship between heavy rainfall and increased bacteria concentration. The boxplot in @fig-boxplot further supports this pattern. The log-transformed enterococci levels are clearly higher in the >10mm group. Besides, the entire box of >10mm group is shifted upward, showing that rainfall likely plays a major role in pollution spikes.
+
+These findings are consistent with prior research that links high bacteria levels with increased illness risk in swimmers, including diarrhea and ear infections (Wade et al., 2012). Similar results were found by Soller et al. (2010), who showed that bacterial concentrations tend to rise after heavy rainfall, increasing the likelihood of gastrointestinal illness.
+
+
+## Reference
+
+Ackerman, D., & Weisberg, S. B. (2003). Relationship between rainfall and beach bacterial concentrations on Santa Monica Bay beaches. Journal of water and health, 1(2), 85-89.
+
+Colford, J. M., Jr, Schiff, K. C., Griffith, J. F., Yau, V., Arnold, B. F., Wright, C. C., Gruber, J. S., Wade, T. J., Burns, S., Hayes, J., McGee, C., Gold, M., Cao, Y., Noble, R. T., Haugland, R., & Weisberg, S. B. (2012). Using rapid indicators for Enterococcus to assess the risk of illness after exposure to urban runoff contaminated marine water. Water research, 46(7), 2176–2186. https://doi.org/10.1016/j.watres.2012.01.033
+
 
