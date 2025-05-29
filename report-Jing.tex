@@ -217,7 +217,7 @@
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{data:}\label{data}
+\subsection{Dataset Description}\label{dataset-description}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -238,6 +238,28 @@
   \FunctionTok{filter}\NormalTok{(date }\SpecialCharTok{\textgreater{}=}\NormalTok{ start\_date }\SpecialCharTok{\&}\NormalTok{ date }\SpecialCharTok{\textless{}=}\NormalTok{ end\_date)}
 \end{Highlighting}
 \end{Shaded}
+
+The dataset utilized in this analysis originates from the TidyTuesday
+project, specifically the release dated May 20, 2025. It encompasses two
+primary components:
+
+\begin{itemize}
+\tightlist
+\item
+  Water Quality Data
+\end{itemize}
+
+This dataset comprises measurements of enterococci levels, expressed in
+colony-forming units per 100 milliliters (CFU/100ml), collected from
+various beaches across New South Wales, Australia.
+
+\begin{itemize}
+\tightlist
+\item
+  Weather Data
+\end{itemize}
+
+This dataset includes meteorological information.
 
 \subsection{Executive Summary}\label{executive-summary}
 
@@ -402,8 +424,7 @@ rain\_group & mean\_enterococci \\
     \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
     \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,     }\CommentTok{\# Remove legend}
     \AttributeTok{panel.grid.major.x =} \FunctionTok{element\_blank}\NormalTok{(), }\CommentTok{\# Remove vertical grid lines}
-    \AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{()}
-\NormalTok{  )}
+    \AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{())}
 \end{Highlighting}
 \end{Shaded}
 

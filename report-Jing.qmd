@@ -2,6 +2,10 @@
 title: "Sydney Beach Quality and Safety Assessment Report"
 author: "Jingyi Wang"
 format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3   
   pdf:
     documentclass: article
     toc: true
@@ -10,11 +14,6 @@ format:
     geometry: margin=1in
     keep-tex: true
     mainfont: Times New Roman
-  html:
-    theme: cosmo
-    toc: true
-    toc-depth: 3   
-  
 editor: visual
 warning: false
 ---
@@ -140,6 +139,7 @@ weather <- weather %>%
 # Merge water and weather datasets by date
 water_weather <- water_quality %>%
   left_join(weather, by = "date")
+
 ```
 
 ```{r}
@@ -160,6 +160,7 @@ rain_table <- water_weather %>%
   group_by(rain_group) %>%
   summarise(mean_enterococci = mean(enterococci_cfu_100ml, na.rm = TRUE))
 kable(rain_table)
+
 ```
 
 
@@ -197,8 +198,8 @@ ggplot(water_weather,
     axis.title = element_text(face = "bold"),
     legend.position = "none",     # Remove legend
     panel.grid.major.x = element_blank(), # Remove vertical grid lines
-    panel.grid.minor = element_blank()
-  )
+    panel.grid.minor = element_blank())
+
 ```
 
 
