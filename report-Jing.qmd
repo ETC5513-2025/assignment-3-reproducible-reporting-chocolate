@@ -4,6 +4,7 @@ author: "Jingyi Wang"
 format: html
 editor: visual
 ---
+
 ## Load Library
 ```{r}
 library(tidyverse)
@@ -183,10 +184,23 @@ The @tbl-rain_table shows that beaches with rainfall greater than 10mm had signi
 These findings are consistent with prior research that links high bacteria levels with increased illness risk in swimmers, including diarrhea and ear infections (Wade et al., 2012). Similar results were found by Soller et al. (2010), who showed that bacterial concentrations tend to rise after heavy rainfall, increasing the likelihood of gastrointestinal illness.
 
 
+## Conclusion
+
+This study shows that some beaches in Sydney, such as Wentworth Falls Lake - Jetty, have very high levels of enterococci. It can be dangerous for public health because swimming in polluted water increases the risk of getting sick, including diarrhea, ear infections and so on. The data also show that rainfall has a strong influence on water quality. After heavy rain, enterococci levels rise a lot. This means that rainfall is a major reason why beach water becomes unsafe. Overall, the results suggest that many beaches are not always safe for swimming, especially after rain.
+
+
+## Recommendations
+
+To protect public health, the government should test beach water quality more often and make the results easy for the public to access. Warning signs or online alerts can help people know when it is unsafe to swim. It is especially important to avoid swimming after heavy rainfall. In addition, weather forecasts and past data can help predict when beaches are likely to be polluted. This can help create early warning systems and reduce the risk of illness from swimming in dirty water.
+
+
 ## Reference
 
 Ackerman, D., & Weisberg, S. B. (2003). Relationship between rainfall and beach bacterial concentrations on Santa Monica Bay beaches. Journal of water and health, 1(2), 85-89.
 
 Colford, J. M., Jr, Schiff, K. C., Griffith, J. F., Yau, V., Arnold, B. F., Wright, C. C., Gruber, J. S., Wade, T. J., Burns, S., Hayes, J., McGee, C., Gold, M., Cao, Y., Noble, R. T., Haugland, R., & Weisberg, S. B. (2012). Using rapid indicators for Enterococcus to assess the risk of illness after exposure to urban runoff contaminated marine water. Water research, 46(7), 2176–2186. https://doi.org/10.1016/j.watres.2012.01.033
+
+
+
 
 
