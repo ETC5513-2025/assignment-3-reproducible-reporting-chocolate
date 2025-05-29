@@ -1,6 +1,6 @@
 ---
 title: "Sydney Beach Quality and Safety Assessment"
-author: "Jingyi Wang"
+author: "Group: chocolate            Jingyi Wang"
 format: 
   revealjs:
     theme: simple
@@ -12,5 +12,262 @@ execute:
   warning: false
 editor: visual
 ---
+```{r}
+library(tidyverse)
+library(knitr)
+library(viridis)
+library(viridisLite)
+```
 
 
+## Executive Summary
+
+-   Analyzed 10 years of Sydney beach data (2015–2025)\
+-   Focused on **enterococci levels** (bacteria in water)\
+-   Found **some beaches highly polluted**, especially Wentworth Falls Lake\
+-   **Rainfall strongly increases** bacteria levels\
+-   Urge for **real-time water quality monitoring** and public alerts
+
+------------------------------------------------------------------------
+
+## Introduction
+
+-   Sydney beaches are popular but sometimes **unsafe** for swimming\
+-   Enterococci bacteria levels are key indicators of **water pollution**\
+-   **Research Questions**:
+    -   Which beaches are most polluted?
+    -   Does **rainfall** increase bacteria levels?
+
+------------------------------------------------------------------------
+
+## Dataset Description
+
+-   **Water Quality** (Enterococci CFU/100ml)\
+-   **Weather Data** (Daily rainfall, temperature)\
+-   Time range: **2015–2025**\
+-   Data Source: [TidyTuesday, May 2025](https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-20/readme.md)
+
+```{r}
+water_quality <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-20/water_quality.csv')
+weather <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-20/weather.csv')
+
+start_date <- as.Date("2015-04-28")
+end_date <- as.Date("2025-04-28")
+
+water_quality <- water_quality %>%
+  filter(date >= start_date & date <= end_date)
+
+weather <- weather %>%
+  filter(date >= start_date & date <= end_date)
+```
+
+------------------------------------------------------------------------
+
+## Methodology (1/2): Worst Beaches
+
+-   Calculated **average enterococci levels** by beach
+
+-   Identified **Top 10 most polluted** sites
+
+-   Used bar chart to show comparison
+
+```{r}
+top_beaches <- water_quality %>%
+  group_by(swim_site) %>%
+  summarise(avg_enterococci = mean(enterococci_cfu_100ml, na.rm = TRUE)) %>%
+  arrange(desc(avg_enterococci)) %>%
+  slice(1:10)
+```
+
+```{r}
+#| label: fig-bar_chart
+#| fig-cap: "Top 10 Beaches with Worst Water Quality"
+#| echo: false
+
+ggplot(top_beaches, aes(x = reorder(swim_site, avg_enterococci), 
+                        y = avg_enterococci,
+                        fill = reorder(swim_site,
+                                       avg_enterococci))) +  
+  
+  geom_col() +  
+  
+  scale_fill_viridis(discrete = TRUE, 
+                     option = "B", 
+                     direction = -1) +  
+  
+  coord_flip() +
+  
+  labs(title = "Top 10 Beaches with Worst Water Quality",
+       subtitle = "Based on average Enterococci levels",
+       x = "Beach",
+       y = "Average Enterococci (CFU/100ml)",
+       caption = "Data source: TidyTuesday") +
+  
+  theme_minimal(base_size = 10) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 13),
+    plot.subtitle = element_text(color = "gray40"),
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black"),
+    legend.position = "none",  # Remove legend
+    panel.grid.major.y = element_blank(),  # Remove horizontal grid lines
+    plot.caption = element_text(color = "gray50", hjust = 0)
+  )
+
+```
+
+------------------------------------------------------------------------
+
+## Methodology (2/2): Rainfall & Water Quality
+
+-   Merged water and weather datasets by date
+
+-   Grouped rainfall:
+
+    -   `0 mm`, `0–10 mm`, `>10 mm`
+
+-   Calculated average bacteria level per group
+
+-   Log10 boxplot for better visibility
+
+```{r}
+# In weather dataset, both latitude and longitude have only unique values.
+weather <- weather %>%
+  select(-latitude, -longitude)
+
+# Merge water and weather datasets by date
+water_weather <- water_quality %>%
+  left_join(weather, by = "date")
+
+```
+
+```{r}
+water_weather <- water_weather %>%
+  mutate(rain_group = case_when(
+    precipitation_mm == 0 ~ "0 mm",
+    precipitation_mm <= 10 ~ "0–10 mm",
+    TRUE ~ ">10 mm"
+  ))
+
+```
+
+------------------------------------------------------------------------
+
+## Bacteria Level by Rainfall
+
+::: {.columns}
+::: {.column width="35%"}
+
+
+```{r}
+#| label: tbl-rain_table
+#| tbl-cap: "Average Enterococci by Rain Group"
+
+rain_table <- water_weather %>%
+  group_by(rain_group) %>%
+  summarise(mean_enterococci = mean(enterococci_cfu_100ml, na.rm = TRUE))
+
+kable(rain_table, format = "html", table.attr = "style='font-size: 55%;'")
+
+```
+
+:::
+::: {.column width="55%"}
+
+```{r}
+#| label: fig-boxplot
+#| fig-cap: "Boxplot of Enterococci Levels by Rainfall Group"
+
+ggplot(water_weather, 
+       aes(x = rain_group, 
+           y = enterococci_cfu_100ml, 
+           fill = rain_group)) +  
+  geom_boxplot(
+    width = 0.6,                
+    color = "black",            
+    size = 0.5,                 
+    outlier.alpha = 0.5   # Outlier transparency
+  ) +
+  scale_y_log10() +
+  scale_fill_manual(
+    values = c("0 mm" = "#FDE725",    
+               "0–10 mm" = "#7AD151",
+               ">10 mm" = "#31688E"), 
+    breaks = c("0 mm", "0–10 mm", ">10 mm")) +
+  labs(
+    title = "Enterococci Levels by Rainfall Group",
+    subtitle = "Log-transformed bacteria concentration (CFU/100ml)",
+    x = "Rainfall Group",
+    y = "Enterococci (CFU/100ml, log10)",
+    caption = "Color intensity reflects rainfall amount. Darker colors indicate higher rainfall."
+  ) +
+  theme_minimal(base_size = 10) +
+  theme(
+    plot.title = element_text(face = "bold", size = 12),
+    plot.subtitle = element_text(color = "gray40"),
+    axis.title = element_text(face = "bold"),
+    legend.position = "none",     # Remove legend
+    panel.grid.major.x = element_blank(), # Remove vertical grid lines
+    panel.grid.minor = element_blank())
+
+```
+
+:::
+:::
+
+------------------------------------------------------------------------
+
+## Result & Conclusion
+
+**Result:**
+```{=html}
+<div style="font-size: 70%;">
+```
+-   The beach with the highest average pollution level is Wentworth Falls Lake - Jetty
+
+-   It suggests that certain beaches consistently have poor water quality from 2015 to 2025
+
+-   Beaches with rainfall greater than 10mm had significantly higher enterococci levels compared to those with 0mm rainfall.
+
+-   These findings are consistent with prior research, including Wade et al.(2012) and  Soller et al. (2010).
+```{=html}
+</div>
+```
+**Conclusion:**
+```{=html}
+<div style="font-size: 70%;">
+```
+- Some beaches in Sydney → Dangerous → The risk of getting sick
+
+- Heavy rainfall → Beach water becomes unsafe
+```{=html}
+</div>
+```
+
+```{=html}
+<div style="font-size: 80%;">
+```
+**Many beaches are not always safe for swimming, especially after rain. **
+```{=html}
+</div>
+```
+--- 
+
+## Recommendations & References
+
+**Recommendations:**
+
+- Increase testing frequency
+
+- Publish data publicly in real time
+
+- Post warning signs after rain
+
+- Use forecast + data to build early warning systems
+
+**Key References:**
+
+- Wade et al. (2012)
+
+- Soller et al. (2010)
