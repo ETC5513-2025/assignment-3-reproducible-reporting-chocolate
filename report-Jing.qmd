@@ -1,0 +1,47 @@
+---
+title: "Sydney Beach Quality and Safety Assessment Report-Executive summary & Introduction"
+author: "Jingyi Wang"
+format: html
+editor: visual
+---
+
+## Load Library
+
+```{r}
+library(tidyverse)
+```
+
+The data:
+
+```{r}
+water_quality <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-20/water_quality.csv')
+weather <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-20/weather.csv')
+```
+
+```{r}
+start_date <- as.Date("2015-04-28", tz ="Australia/Sydney")
+end_date <- as.Date("2025-04-28", tz ="Australia/Sydney")
+
+water_quality <- water_quality %>%
+  filter(date >= start_date & date <= end_date)
+
+weather <- weather %>%
+  filter(date >= start_date & date <= end_date)
+```
+
+## Executive Summary
+
+This report investigates water pollution at public beaches by analysing enterococci levels using environmental and weather data. The findings show that several beaches have extremely high average pollution levels. It poses serious health risks to swimmers. Moreover, enterococci concentrations were significantly higher after rainfall, which suggests that rain events are a strong predictor of poor water quality. These results align with existing studies. We recommend regular monitoring and public reporting of water quality, especially after heavy rainfall. It will help to reduce public health risks and support preventive decision-making.
+
+
+
+## Introduction
+
+Sydney's beaches are popular swimming spots, but water quality issues sometimes occur. This report analyzes 10 years (2015-2025) of water test data from beaches and weather data, originally collected by the TidyTuesday project. We focus on Enterococci bacteria levels, which indicate potential health risks.
+
+Beach water quality is significant for health and tourism. Poor water conditions can cause illness and reduce the number of visitors. This analysis helps us understand two key questions:
+
+-   Which beaches have the worst water quality?
+-   When do problems typically occur particularly after rainfall?
+
+By using data science tools, we aim to give clear and useful insights. Our goal is to support better decisions for beach safety and environmental protection.
