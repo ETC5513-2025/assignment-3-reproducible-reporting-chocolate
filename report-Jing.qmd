@@ -19,6 +19,7 @@ editor: visual
 warning: false
 ---
 
+
 ## Load Library
 ```{r}
 library(tidyverse)
@@ -27,7 +28,8 @@ library(viridisLite)
 library(knitr)
 ```
 
-## Data
+
+## Dataset Description
 
 ```{r}
 water_quality <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-20/water_quality.csv')
@@ -47,6 +49,16 @@ weather <- weather %>%
 
 ```
 
+The dataset utilized in this analysis originates from the TidyTuesday project, specifically the release dated May 20, 2025. It encompasses two primary components:
+
+- Water Quality Data
+
+This dataset comprises measurements of enterococci levels, expressed in colony-forming units per 100 milliliters (CFU/100ml), collected from various beaches across New South Wales, Australia. 
+
+- Weather Data
+
+This dataset includes meteorological information.
+
 
 ## Executive Summary
 
@@ -63,6 +75,7 @@ Beach water quality is significant for health and tourism. Poor water conditions
 -   When do problems typically occur particularly after rainfall?
 
 By using data science tools, we aim to give clear and useful insights. Our goal is to support better decisions for beach safety and environmental protection.
+
 
 ## Methodology
 
@@ -188,6 +201,7 @@ ggplot(water_weather,
   )
 ```
 
+
 ## Result
 
 From @fig-bar_chart, the beach with the highest average pollution level is Wentworth Falls Lake - Jetty, with more than 500 CFU/100ml. This is about twice the level of the second-ranked site, Megalong Creek. The other eight beaches in the top 10 also show high pollution, at average values above 100 CFU/100ml. These results suggest that certain beaches consistently have poor water quality from 2015 to 2025.
@@ -212,4 +226,3 @@ To protect public health, the government should test beach water quality more of
 Ackerman, D., & Weisberg, S. B. (2003). Relationship between rainfall and beach bacterial concentrations on Santa Monica Bay beaches. Journal of water and health, 1(2), 85-89.
 
 Colford, J. M., Jr, Schiff, K. C., Griffith, J. F., Yau, V., Arnold, B. F., Wright, C. C., Gruber, J. S., Wade, T. J., Burns, S., Hayes, J., McGee, C., Gold, M., Cao, Y., Noble, R. T., Haugland, R., & Weisberg, S. B. (2012). Using rapid indicators for Enterococcus to assess the risk of illness after exposure to urban runoff contaminated marine water. Water research, 46(7), 2176–2186. https://doi.org/10.1016/j.watres.2012.01.033
-
