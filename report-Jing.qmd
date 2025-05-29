@@ -1,5 +1,5 @@
 ---
-title: "Sydney Beach Quality and Safety Assessment Report-Executive summary & Introduction"
+title: "Sydney Beach Quality and Safety Assessment Report"
 author: "Jingyi Wang"
 format: html
 editor: visual
@@ -9,6 +9,9 @@ editor: visual
 
 ```{r}
 library(tidyverse)
+library(viridisLite)
+library(knitr)
+
 ```
 
 The data:
@@ -29,6 +32,7 @@ weather <- weather %>%
   filter(date >= start_date & date <= end_date)
 ```
 
+
 ## Executive Summary
 
 This report investigates water pollution at public beaches by analysing enterococci levels using environmental and weather data. The findings show that several beaches have extremely high average pollution levels. It poses serious health risks to swimmers. Moreover, enterococci concentrations were significantly higher after rainfall, which suggests that rain events are a strong predictor of poor water quality. These results align with existing studies. We recommend regular monitoring and public reporting of water quality, especially after heavy rainfall. It will help to reduce public health risks and support preventive decision-making.
@@ -45,3 +49,127 @@ Beach water quality is significant for health and tourism. Poor water conditions
 -   When do problems typically occur particularly after rainfall?
 
 By using data science tools, we aim to give clear and useful insights. Our goal is to support better decisions for beach safety and environmental protection.
+
+## Methodology
+
+In this project, we aim to find which beaches have the worst water quality in Sydney and whether the water quality becomes worse after rainfall. We use two datasets: `water_quality` and `weather`. The water quality dataset records enterococci bacteria levels in colony forming units (CFU) per 100 millilitres of water, temperature, and conductivity at different swim sites. The weather dataset provides daily rainfall data.
+
+First, we calculate the average enterococci level for each beach (swim_site) to identify the most polluted beaches. We use a bar chart (@fig-bar_chart) to show the top 10 beaches with the highest average pollution levels.
+
+```{r}
+top_beaches <- water_quality %>%
+  group_by(swim_site) %>%
+  summarise(avg_enterococci = mean(enterococci_cfu_100ml, na.rm = TRUE)) %>%
+  arrange(desc(avg_enterococci)) %>%
+  slice(1:10)
+```
+
+```{r}
+#| label: fig-bar_chart
+#| fig-cap: "Top 10 Beaches with Worst Water Quality"
+#| echo: false
+
+ggplot(top_beaches, aes(x = reorder(swim_site, avg_enterococci), 
+                        y = avg_enterococci,
+                        fill = reorder(swim_site,
+                                       avg_enterococci))) +  
+  
+  geom_col() +  
+  
+  scale_fill_viridis(discrete = TRUE, 
+                     option = "D", 
+                     direction = -1) +  
+  
+  coord_flip() +
+  
+  labs(title = "Top 10 Beaches with Worst Water Quality",
+       subtitle = "Based on average enterococci levels",
+       x = "Beach",
+       y = "Average Enterococci (CFU/100ml)",
+       caption = "Data source: TidyTuesday") +
+  
+  theme_minimal(base_size = 10) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 13),
+    plot.subtitle = element_text(color = "gray40"),
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black"),
+    legend.position = "none",  # Remove legend
+    panel.grid.major.y = element_blank(),  # Remove horizontal grid lines
+    plot.caption = element_text(color = "gray50", hjust = 0)
+  )
+
+```
+
+Second, we explore the relationship between rainfall and water quality. We merge the two datasets by date and then group the data by rainfall level (0 mm, 0–10 mm, \>10 mm). The @tbl-rain_table shows the average enterococci count in each rainfall group, while a boxplot (@fig-boxplot) illustrates the distribution of bacteria levels across these categories. To account for extreme values and zero enterococci readings, a log10 transformation is applied to enhance the visibility of the boxplot. And rows with zero or missing values were automatically excluded by the plotting function.
+
+```{r}
+# In weather dataset, both latitude and longitude have only unique values.
+weather <- weather %>%
+  select(-latitude, -longitude)
+
+# Merge water and weather datasets by date
+water_weather <- water_quality %>%
+  left_join(weather, by = "date")
+```
+
+```{r}
+water_weather <- water_weather %>%
+  mutate(rain_group = case_when(
+    precipitation_mm == 0 ~ "0 mm",
+    precipitation_mm <= 10 ~ "0–10 mm",
+    TRUE ~ ">10 mm"
+  ))
+
+```
+
+```{r}
+#| label: tbl-rain_table
+#| tbl-cap: Average Enterococci by Rain Group
+
+rain_table <- water_weather %>%
+  group_by(rain_group) %>%
+  summarise(mean_enterococci = mean(enterococci_cfu_100ml, na.rm = TRUE))
+kable(rain_table)
+```
+
+```{r}
+#| label: fig-boxplot
+#| fig-cap: "Boxplot of Enterococci Levels by Rainfall Group"
+
+ggplot(water_weather, 
+       aes(x = rain_group, 
+           y = enterococci_cfu_100ml, 
+           fill = rain_group)) +  
+  geom_boxplot(
+    width = 0.6,                
+    color = "black",            
+    size = 0.5,                 
+    outlier.alpha = 0.5         # Outlier transparency
+  ) +
+  scale_y_log10() +
+  scale_fill_manual(
+    values = c("0 mm" = "#FDE725",    # viridis 浅色（无雨）
+               "0–10 mm" = "#7AD151", # viridis 中等（小雨）
+               ">10 mm" = "#31688E"), # viridis 深色（大雨）
+    breaks = c("0 mm", "0–10 mm", ">10 mm")  # 确保顺序一致
+  ) +
+  labs(
+    title = "Enterococci Levels by Rainfall Group",
+    subtitle = "Log-transformed bacteria concentration (CFU/100ml)",
+    x = "Rainfall Group",
+    y = "Enterococci (CFU/100ml, log10)",
+    caption = "Color intensity reflects rainfall amount"
+  ) +
+  theme_minimal(base_size = 10) +
+  theme(
+    plot.title = element_text(face = "bold", size = 13),
+    plot.subtitle = element_text(color = "gray40"),
+    axis.title = element_text(face = "bold"),
+    legend.position = "none",     # Remove legend
+    panel.grid.major.x = element_blank(), # Remove vertical grid lines
+    panel.grid.minor = element_blank()
+  )
+```
+
