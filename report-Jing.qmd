@@ -1,0 +1,17 @@
+---
+title: "Conclusion_Reco"
+author: "Jingyi Wang"
+format: html
+editor: visual
+---
+
+## Conclusion
+
+This study shows that some beaches in Sydney, such as Wentworth Falls Lake - Jetty, have very high levels of enterococci. It can be dangerous for public health because swimming in polluted water increases the risk of getting sick, including diarrhea, ear infections and so on. The data also show that rainfall has a strong influence on water quality. After heavy rain, enterococci levels rise a lot. This means that rainfall is a major reason why beach water becomes unsafe. Overall, the results suggest that many beaches are not always safe for swimming, especially after rain.
+
+
+## Recommendations
+
+To protect public health, the government should test beach water quality more often and make the results easy for the public to access. Warning signs or online alerts can help people know when it is unsafe to swim. It is especially important to avoid swimming after heavy rainfall. In addition, weather forecasts and past data can help predict when beaches are likely to be polluted. This can help create early warning systems and reduce the risk of illness from swimming in dirty water.
+
+
