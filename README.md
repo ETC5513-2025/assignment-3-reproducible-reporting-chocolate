@@ -2,8 +2,8 @@
 
 Group Members:
 
-*
+* Jingyi Wang
 *
 *
 
-Topic: 
+Topic: Sydney Beach Quality and Safety Assessment Report
