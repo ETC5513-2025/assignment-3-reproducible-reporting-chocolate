@@ -9,7 +9,7 @@
 <link href="Slide - Sydney Beach Quality and Safety Assessment_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.42">
 
-  <meta name="author" content="Group: chocolate Jingyi Wang">
+  <meta name="author" content="Group member: Jingyi Wang">
   <title>Sydney Beach Quality and Safety Assessment</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -126,99 +126,111 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
+<section id="title-slide" data-background-image="picture/beach.jpg" data-background-opacity="0.7" data-background-size="cover" class="quarto-title-block center">
   <h1 class="title">Sydney Beach Quality and Safety Assessment</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Group: chocolate Jingyi Wang 
+Group member: Jingyi Wang 
 </div>
 </div>
 </div>
 
-</section><section id="TOC">
-<nav role="doc-toc"> 
-<h2 id="toc-title">Table of contents</h2>
-<ul>
-<li><a href="#/executive-summary" id="/toc-executive-summary">Executive Summary</a></li>
-<li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
-<li><a href="#/dataset-description" id="/toc-dataset-description">Dataset Description</a></li>
-<li><a href="#/methodology-12-worst-beaches" id="/toc-methodology-12-worst-beaches">Methodology (1/2): Worst Beaches</a></li>
-<li><a href="#/methodology-22-rainfall-water-quality" id="/toc-methodology-22-rainfall-water-quality">Methodology (2/2): Rainfall &amp; Water Quality</a></li>
-<li><a href="#/bacteria-level-by-rainfall" id="/toc-bacteria-level-by-rainfall">Bacteria Level by Rainfall</a></li>
-<li><a href="#/result-conclusion" id="/toc-result-conclusion">Result &amp; Conclusion</a></li>
-<li><a href="#/recommendations-references" id="/toc-recommendations-references">Recommendations &amp; References</a></li>
-</ul>
-</nav>
 </section>
-<section id="executive-summary" class="slide level2">
+<section id="table-of-contents" class="slide level2" data-background-image="picture/beach7.jpg" data-background-size="cover" data-background-opacity="0.5">
+<h2>Table of Contents</h2>
+<div style="font-size: 90%;">
+<ol type="1">
+<li><p>Executive Summary</p></li>
+<li><p>Introduction</p></li>
+<li><p>Dataset Description</p></li>
+<li><p>Methodology (1/2): Worst Beaches</p></li>
+<li><p>Methodology (2/2): Rainfall &amp; Water Quality</p></li>
+<li><p>Bacteria Level by Rainfall</p></li>
+<li><p>Result &amp; Conclusion</p></li>
+<li><p>Recommendations &amp; References</p></li>
+</ol>
+</div>
+</section>
+<section id="executive-summary" class="slide level2" data-background-image="picture/beach1.jpg" data-background-size="cover" data-background-opacity="0.5">
 <h2>Executive Summary</h2>
 <ul>
-<li>Analyzed 10 years of Sydney beach data (2015–2025)<br>
-</li>
-<li>Focused on <strong>enterococci levels</strong> (bacteria in water)<br>
-</li>
-<li>Found <strong>some beaches highly polluted</strong>, especially Wentworth Falls Lake<br>
-</li>
-<li><strong>Rainfall strongly increases</strong> bacteria levels<br>
-</li>
-<li>Urge for <strong>real-time water quality monitoring</strong> and public alerts</li>
+<li><p>Analyzed 10 years of Sydney beach data (2015–2025)<br>
+</p></li>
+<li><p>Focused on <strong>enterococci levels</strong> (bacteria in water)<br>
+</p></li>
+<li><p>Found <strong>some beaches highly polluted</strong>, especially Wentworth Falls Lake<br>
+</p></li>
+<li><p><strong>Rainfall strongly increases</strong> bacteria levels<br>
+</p></li>
+<li><p>Urge for <strong>real-time water quality monitoring</strong> and public alerts</p></li>
 </ul>
 </section>
-<section id="introduction" class="slide level2">
+<section id="introduction" class="slide level2" data-background-image="picture/beach5.jpg" data-background-size="cover" data-background-opacity="0.5">
 <h2>Introduction</h2>
-<ul>
-<li>Sydney beaches are popular but sometimes <strong>unsafe</strong> for swimming<br>
-</li>
-<li>Enterococci bacteria levels are key indicators of <strong>water pollution</strong><br>
-</li>
-<li><strong>Research Questions</strong>:
+<p>😱 Sydney beaches are popular but sometimes <strong>unsafe</strong> for swimming</p>
+<p>😈 Enterococci bacteria levels are key indicators of <strong>water pollution</strong></p>
+<p>❓ <strong>Research Questions</strong>:</p>
 <ul>
 <li>Which beaches are most polluted?</li>
 <li>Does <strong>rainfall</strong> increase bacteria levels?</li>
+</ul>
+</section>
+<section id="dataset-description" class="slide level2" data-background-image="picture/beach6.jpg" data-background-size="cover" data-background-opacity="0.5">
+<h2>Dataset Description</h2>
+<div style="font-size: 79%;">
+<p>🌊 <strong>water_quality.csv</strong></p>
+</div>
+<div style="font-size: 70%;">
+<ul>
+<li><p>Imoprtant variables:</p>
+<ul>
+<li>swim_site: Name of beach/swimming location</li>
+<li>date</li>
+<li>enterococci_cfu_100ml: Enterococci bacteria levels in colony forming units (CFU) per 100 millilitre</li>
 </ul></li>
 </ul>
-</section>
-<section id="dataset-description" class="slide level2">
-<h2>Dataset Description</h2>
+</div>
+<div style="font-size: 79%;">
+<p>🌡️ <strong>weather.csv</strong></p>
+</div>
+<div style="font-size: 70%;">
 <ul>
-<li><strong>Water Quality</strong> (Enterococci CFU/100ml)<br>
-</li>
-<li><strong>Weather Data</strong> (Daily rainfall, temperature)<br>
-</li>
-<li>Time range: <strong>2015–2025</strong><br>
-</li>
-<li>Data Source: <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-20/readme.md">TidyTuesday, May 2025</a></li>
+<li><p>Imoprtant variables:</p>
+<ul>
+<li>date</li>
+<li>precipitation_mm: Rainfall in millimetres</li>
+</ul></li>
 </ul>
+</div>
+<div style="font-size: 79%;">
+<p>⌚ Time range: <strong>2015.04.28 – 2025.04.28</strong><br>
+</p>
+<p>📖 Data Source: <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-20/readme.md">TidyTuesday, May 2025</a></p>
+</div>
 </section>
-<section id="methodology-12-worst-beaches" class="slide level2">
+<section id="methodology-12-worst-beaches" class="slide level2" data-background-image="picture/beach2.jpg" data-background-size="cover" data-background-opacity="0.5">
 <h2>Methodology (1/2): Worst Beaches</h2>
-<ul>
-<li><p>Calculated <strong>average enterococci levels</strong> by beach</p></li>
-<li><p>Identified <strong>Top 10 most polluted</strong> sites</p></li>
-<li><p>Used bar chart to show comparison</p></li>
-</ul>
+<p>💻 Calculated <strong>average enterococci levels</strong> by beach</p>
+<p>🔍 Identified <strong>Top 10 most polluted</strong> sites</p>
+<p>🖌️ Used bar chart to show comparison</p>
 
 <img data-src="Slide---Sydney-Beach-Quality-and-Safety-Assessment_files/figure-revealjs/fig-bar_chart-1.png" width="960" class="r-stretch quarto-figure-center" id="fig-bar_chart"><p class="caption">
 Figure&nbsp;1: Top 10 Beaches with Worst Water Quality
 </p></section>
-<section id="methodology-22-rainfall-water-quality" class="slide level2">
+<section id="methodology-22-rainfall-water-quality" class="slide level2" data-background-image="picture/beach2.jpg" data-background-size="cover" data-background-opacity="0.5">
 <h2>Methodology (2/2): Rainfall &amp; Water Quality</h2>
-<ul>
-<li><p>Merged water and weather datasets by date</p></li>
-<li><p>Grouped rainfall:</p>
-<ul>
-<li><code>0 mm</code>, <code>0–10 mm</code>, <code>&gt;10 mm</code></li>
-</ul></li>
-<li><p>Calculated average bacteria level per group</p></li>
-<li><p>Log10 boxplot for better visibility</p></li>
-</ul>
+<p>🦄 <strong>Merged</strong> water and weather datasets by date</p>
+<p>🗂️ <strong>Grouped</strong> rainfall:</p>
+<p>0 mm , 0–10 mm , &gt;10 mm</p>
+<p>🤔 Calculated average bacteria level per group</p>
+<p>👁️ <strong>Log10 boxplot</strong> for better visibility</p>
 </section>
-<section id="bacteria-level-by-rainfall" class="slide level2">
+<section id="bacteria-level-by-rainfall" class="slide level2" data-background-image="picture/beach2.jpg" data-background-size="cover" data-background-opacity="0.5">
 <h2>Bacteria Level by Rainfall</h2>
 <div class="columns">
-<div class="column" style="width:35%;">
+<div class="column" style="width:40%;">
 <div class="cell">
 <div id="tbl-rain_table" class="cell quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-tbl">
@@ -227,36 +239,486 @@ Table&nbsp;1: Average Enterococci by Rain Group
 </figcaption>
 <div aria-describedby="tbl-rain_table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top" data-quarto-postprocess="true" style="font-size: 55%;">
+<div id="hrblwkdjjh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hrblwkdjjh table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hrblwkdjjh thead, #hrblwkdjjh tbody, #hrblwkdjjh tfoot, #hrblwkdjjh tr, #hrblwkdjjh td, #hrblwkdjjh th {
+  border-style: none;
+}
+
+#hrblwkdjjh p {
+  margin: 0;
+  padding: 0;
+}
+
+#hrblwkdjjh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 20px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hrblwkdjjh .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hrblwkdjjh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hrblwkdjjh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hrblwkdjjh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hrblwkdjjh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hrblwkdjjh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hrblwkdjjh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hrblwkdjjh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hrblwkdjjh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hrblwkdjjh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hrblwkdjjh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hrblwkdjjh .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hrblwkdjjh .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hrblwkdjjh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hrblwkdjjh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hrblwkdjjh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hrblwkdjjh .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hrblwkdjjh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hrblwkdjjh .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hrblwkdjjh .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hrblwkdjjh .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hrblwkdjjh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hrblwkdjjh .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hrblwkdjjh .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hrblwkdjjh .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hrblwkdjjh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hrblwkdjjh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hrblwkdjjh .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hrblwkdjjh .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hrblwkdjjh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hrblwkdjjh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hrblwkdjjh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hrblwkdjjh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hrblwkdjjh .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hrblwkdjjh .gt_left {
+  text-align: left;
+}
+
+#hrblwkdjjh .gt_center {
+  text-align: center;
+}
+
+#hrblwkdjjh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hrblwkdjjh .gt_font_normal {
+  font-weight: normal;
+}
+
+#hrblwkdjjh .gt_font_bold {
+  font-weight: bold;
+}
+
+#hrblwkdjjh .gt_font_italic {
+  font-style: italic;
+}
+
+#hrblwkdjjh .gt_super {
+  font-size: 65%;
+}
+
+#hrblwkdjjh .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hrblwkdjjh .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hrblwkdjjh .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hrblwkdjjh .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hrblwkdjjh .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hrblwkdjjh .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hrblwkdjjh .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hrblwkdjjh .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hrblwkdjjh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">rain_group</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">mean_enterococci</th>
+<tr class="gt_col_headings header">
+<th id="rain_group" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Rain Group</th>
+<th id="mean_enterococci" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Mean Enterococci</th>
 </tr>
 </thead>
-<tbody>
+<tbody class="gt_table_body">
 <tr class="odd">
-<td style="text-align: left;">0 mm</td>
-<td style="text-align: right;">17.64191</td>
+<td class="gt_row gt_left" headers="rain_group" style="background-color: #F7F7F7">0 mm</td>
+<td class="gt_row gt_right" headers="mean_enterococci" style="background-color: #F7F7F7">17.64</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">0–10 mm</td>
-<td style="text-align: right;">52.71743</td>
+<td class="gt_row gt_left" headers="rain_group" style="background-color: #F7F7F7">0–10 mm</td>
+<td class="gt_row gt_right" headers="mean_enterococci" style="background-color: #F7F7F7">52.72</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">&gt;10 mm</td>
-<td style="text-align: right;">167.10027</td>
+<td class="gt_row gt_left" headers="rain_group" style="background-color: #F7F7F7">&gt;10 mm</td>
+<td class="gt_row gt_right" headers="mean_enterococci" style="background-color: #F7F7F7">167.10</td>
 </tr>
 </tbody>
 </table>
 
-
+</div>
 </div>
 </div>
 </figure>
 </div>
 </div>
-</div><div class="column" style="width:55%;">
+</div><div class="column" style="width:60%;">
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-boxplot" class="quarto-float quarto-figure quarto-figure-center">
@@ -273,29 +735,25 @@ Figure&nbsp;2: Boxplot of Enterococci Levels by Rainfall Group
 </div>
 </div></div>
 </section>
-<section id="result-conclusion" class="slide level2">
+<section id="result-conclusion" class="slide level2" data-background-image="picture/beach3.jpg" data-background-size="cover" data-background-opacity="0.5">
 <h2>Result &amp; Conclusion</h2>
 <p><strong>Result:</strong></p>
 <div style="font-size: 70%;">
-<ul>
-<li><p>The beach with the highest average pollution level is Wentworth Falls Lake - Jetty</p></li>
-<li><p>It suggests that certain beaches consistently have poor water quality from 2015 to 2025</p></li>
-<li><p>Beaches with rainfall greater than 10mm had significantly higher enterococci levels compared to those with 0mm rainfall.</p></li>
-<li><p>These findings are consistent with prior research, including Wade et al.(2012) and Soller et al.&nbsp;(2010).</p></li>
-</ul>
+<p>🏆 The beach with the highest average pollution level is Wentworth Falls Lake - Jetty.</p>
+<p>🙀 It suggests that certain beaches consistently have poor water quality from 2015 to 2025.</p>
+<p>🌧️ Beaches with rainfall greater than 10mm had significantly higher enterococci levels compared to those with 0mm rainfall.</p>
+<p>📚 These findings are consistent with prior research, including Wade et al.(2012) and Soller et al.&nbsp;(2010).</p>
 </div>
 <p><strong>Conclusion:</strong></p>
 <div style="font-size: 70%;">
-<ul>
-<li><p>Some beaches in Sydney → Dangerous → The risk of getting sick</p></li>
-<li><p>Heavy rainfall → Beach water becomes unsafe</p></li>
-</ul>
+<p>Some beaches in Sydney → Dangerous → The risk of getting sick</p>
+<p>Heavy rainfall → Beach water becomes unsafe</p>
 </div>
 <div style="font-size: 80%;">
-<p><strong>Many beaches are not always safe for swimming, especially after rain. </strong></p>
+<p><strong>Many beaches are not always safe for swimming, especially after rain.</strong></p>
 </div>
 </section>
-<section id="recommendations-references" class="slide level2">
+<section id="recommendations-references" class="slide level2" data-background-image="picture/beach4.jpg" data-background-size="cover" data-background-opacity="0.5">
 <h2>Recommendations &amp; References</h2>
 <p><strong>Recommendations:</strong></p>
 <ul>
@@ -304,7 +762,7 @@ Figure&nbsp;2: Boxplot of Enterococci Levels by Rainfall Group
 <li><p>Post warning signs after rain</p></li>
 <li><p>Use forecast + data to build early warning systems</p></li>
 </ul>
-<p><strong>Key References:</strong></p>
+<p><strong>References:</strong></p>
 <ul>
 <li><p>Wade et al.&nbsp;(2012)</p></li>
 <li><p>Soller et al.&nbsp;(2010)</p></li>
@@ -472,14 +930,14 @@ Figure&nbsp;2: Boxplot of Enterococci Levels by Rainfall Group
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
 
         // Transition style for full page slide backgrounds
         // (none/fade/slide/convex/concave/zoom)
-        backgroundTransition: 'none',
+        backgroundTransition: 'slide',
 
         // Number of slides away from the current that are visible
         viewDistance: 3,

@@ -1,51 +1,120 @@
 ---
 title: "Sydney Beach Quality and Safety Assessment"
-author: "Group: chocolate            Jingyi Wang"
+author: "Group member:            Jingyi Wang"
 format: 
   revealjs:
     theme: simple
+    title-slide-attributes:
+      data-background-image: "picture/beach.jpg"
+      data-background-size: "cover"
+      data-background-opacity: "0.7"
     slide-number: true
-    toc: true
-    toc-depth: 2
+    transition: slide
+    background-transition: slide
+    
 execute:
   echo: false
   warning: false
 editor: visual
 ---
+
 ```{r}
 library(tidyverse)
 library(knitr)
 library(viridis)
 library(viridisLite)
+library(gt)
 ```
 
+## Table of Contents {background-image="picture/beach7.jpg" background-size="cover" background-opacity="0.5"}
 
-## Executive Summary
+::: {style="font-size: 90%;"}
+1.  Executive Summary
+
+2.  Introduction
+
+3.  Dataset Description
+
+4.  Methodology (1/2): Worst Beaches
+
+5.  Methodology (2/2): Rainfall & Water Quality
+
+6.  Bacteria Level by Rainfall
+
+7.  Result & Conclusion
+
+8.  Recommendations & References
+:::
+
+------------------------------------------------------------------------
+
+## Executive Summary {background-image="picture/beach1.jpg" background-size="cover" background-opacity="0.5"}
 
 -   Analyzed 10 years of Sydney beach data (2015–2025)\
+
 -   Focused on **enterococci levels** (bacteria in water)\
+
 -   Found **some beaches highly polluted**, especially Wentworth Falls Lake\
+
 -   **Rainfall strongly increases** bacteria levels\
+
 -   Urge for **real-time water quality monitoring** and public alerts
 
 ------------------------------------------------------------------------
 
-## Introduction
+## Introduction {background-image="picture/beach5.jpg" background-size="cover" background-opacity="0.5"}
 
--   Sydney beaches are popular but sometimes **unsafe** for swimming\
--   Enterococci bacteria levels are key indicators of **water pollution**\
--   **Research Questions**:
-    -   Which beaches are most polluted?
-    -   Does **rainfall** increase bacteria levels?
+😱 Sydney beaches are popular but sometimes **unsafe** for swimming
+
+😈 Enterococci bacteria levels are key indicators of **water pollution**
+
+❓ **Research Questions**:
+
+-   Which beaches are most polluted?
+-   Does **rainfall** increase bacteria levels?
 
 ------------------------------------------------------------------------
 
-## Dataset Description
+## Dataset Description {background-image="picture/beach6.jpg" background-size="cover" background-opacity="0.5"}
 
--   **Water Quality** (Enterococci CFU/100ml)\
--   **Weather Data** (Daily rainfall, temperature)\
--   Time range: **2015–2025**\
--   Data Source: [TidyTuesday, May 2025](https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-20/readme.md)
+::: {style="font-size: 79%;"}
+
+🌊 **water_quality.csv**
+
+:::
+
+::: {style="font-size: 70%;"}
+
+-   Imoprtant variables:
+
+    -   swim_site: Name of beach/swimming location
+    -   date
+    -   enterococci_cfu_100ml: Enterococci bacteria levels in colony forming units (CFU) per 100 millilitre
+
+:::
+
+::: {style="font-size: 79%;"}
+
+🌡️ **weather.csv**
+
+:::
+
+::: {style="font-size: 70%;"}
+
+-   Imoprtant variables:
+
+    -   date
+    -   precipitation_mm: Rainfall in millimetres
+    
+:::
+
+::: {style="font-size: 79%;"}
+
+⌚ Time range: **2015.04.28 – 2025.04.28**\
+
+📖 Data Source: [TidyTuesday, May 2025](https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-20/readme.md)
+
+:::
 
 ```{r}
 water_quality <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-20/water_quality.csv')
@@ -63,13 +132,13 @@ weather <- weather %>%
 
 ------------------------------------------------------------------------
 
-## Methodology (1/2): Worst Beaches
+## Methodology (1/2): Worst Beaches {background-image="picture/beach2.jpg" background-size="cover" background-opacity="0.5"}
 
--   Calculated **average enterococci levels** by beach
+💻 Calculated **average enterococci levels** by beach
 
--   Identified **Top 10 most polluted** sites
+🔍 Identified **Top 10 most polluted** sites
 
--   Used bar chart to show comparison
+🖌️ Used bar chart to show comparison
 
 ```{r}
 top_beaches <- water_quality %>%
@@ -103,10 +172,10 @@ ggplot(top_beaches, aes(x = reorder(swim_site, avg_enterococci),
        y = "Average Enterococci (CFU/100ml)",
        caption = "Data source: TidyTuesday") +
   
-  theme_minimal(base_size = 10) +
+  theme_minimal(base_size = 18) +
   
   theme(
-    plot.title = element_text(face = "bold", size = 13),
+    plot.title = element_text(face = "bold", size = 22),
     plot.subtitle = element_text(color = "gray40"),
     axis.title = element_text(face = "bold"),
     axis.text = element_text(color = "black"),
@@ -119,17 +188,17 @@ ggplot(top_beaches, aes(x = reorder(swim_site, avg_enterococci),
 
 ------------------------------------------------------------------------
 
-## Methodology (2/2): Rainfall & Water Quality
+## Methodology (2/2): Rainfall & Water Quality {background-image="picture/beach2.jpg" background-size="cover" background-opacity="0.5"}
 
--   Merged water and weather datasets by date
+🦄 **Merged** water and weather datasets by date
 
--   Grouped rainfall:
+🗂️ **Grouped** rainfall:
 
-    -   `0 mm`, `0–10 mm`, `>10 mm`
+0 mm , 0–10 mm , >10 mm
 
--   Calculated average bacteria level per group
+🤔 Calculated average bacteria level per group
 
--   Log10 boxplot for better visibility
+👁️ **Log10 boxplot** for better visibility
 
 ```{r}
 # In weather dataset, both latitude and longitude have only unique values.
@@ -154,30 +223,49 @@ water_weather <- water_weather %>%
 
 ------------------------------------------------------------------------
 
-## Bacteria Level by Rainfall
+## Bacteria Level by Rainfall {background-image="picture/beach2.jpg" background-size="cover" background-opacity="0.5"}
 
-::: {.columns}
-::: {.column width="35%"}
-
-
+::::: columns
+::: {.column width="40%"}
 ```{r}
 #| label: tbl-rain_table
 #| tbl-cap: "Average Enterococci by Rain Group"
+
+
 
 rain_table <- water_weather %>%
   group_by(rain_group) %>%
   summarise(mean_enterococci = mean(enterococci_cfu_100ml, na.rm = TRUE))
 
-kable(rain_table, format = "html", table.attr = "style='font-size: 55%;'")
+
+rain_table %>% 
+  gt() %>%
+  tab_options(
+    table.font.size = px(20),
+    table.width = pct(100)) %>%
+  fmt_number(columns = mean_enterococci, decimals = 2) %>%
+  cols_label(
+    rain_group = "Rain Group",
+    mean_enterococci = "Mean Enterococci"
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "#f7f7f7"),
+    locations = cells_body(rows = everything())
+  )
 
 ```
-
 :::
-::: {.column width="55%"}
 
+::: {.column width="60%"}
 ```{r}
 #| label: fig-boxplot
 #| fig-cap: "Boxplot of Enterococci Levels by Rainfall Group"
+
+
 
 ggplot(water_weather, 
        aes(x = rain_group, 
@@ -202,9 +290,9 @@ ggplot(water_weather,
     y = "Enterococci (CFU/100ml, log10)",
     caption = "Color intensity reflects rainfall amount. Darker colors indicate higher rainfall."
   ) +
-  theme_minimal(base_size = 10) +
+  theme_minimal(base_size = 20) +
   theme(
-    plot.title = element_text(face = "bold", size = 12),
+    plot.title = element_text(face = "bold", size = 26),
     plot.subtitle = element_text(color = "gray40"),
     axis.title = element_text(face = "bold"),
     legend.position = "none",     # Remove legend
@@ -212,62 +300,53 @@ ggplot(water_weather,
     panel.grid.minor = element_blank())
 
 ```
-
 :::
+:::::
+
+------------------------------------------------------------------------
+
+## Result & Conclusion {background-image="picture/beach3.jpg" background-size="cover" background-opacity="0.5"}
+
+**Result:**
+
+::: {style="font-size: 70%;"}
+🏆 The beach with the highest average pollution level is Wentworth Falls Lake - Jetty.
+
+🙀 It suggests that certain beaches consistently have poor water quality from 2015 to 2025.
+
+🌧️ Beaches with rainfall greater than 10mm had significantly higher enterococci levels compared to those with 0mm rainfall.
+
+📚 These findings are consistent with prior research, including Wade et al.(2012) and Soller et al. (2010).
+:::
+
+**Conclusion:**
+
+::: {style="font-size: 70%;"}
+Some beaches in Sydney → Dangerous → The risk of getting sick
+
+Heavy rainfall → Beach water becomes unsafe
+:::
+
+::: {style="font-size: 80%;"}
+**Many beaches are not always safe for swimming, especially after rain.**
 :::
 
 ------------------------------------------------------------------------
 
-## Result & Conclusion
-
-**Result:**
-```{=html}
-<div style="font-size: 70%;">
-```
--   The beach with the highest average pollution level is Wentworth Falls Lake - Jetty
-
--   It suggests that certain beaches consistently have poor water quality from 2015 to 2025
-
--   Beaches with rainfall greater than 10mm had significantly higher enterococci levels compared to those with 0mm rainfall.
-
--   These findings are consistent with prior research, including Wade et al.(2012) and  Soller et al. (2010).
-```{=html}
-</div>
-```
-**Conclusion:**
-```{=html}
-<div style="font-size: 70%;">
-```
-- Some beaches in Sydney → Dangerous → The risk of getting sick
-
-- Heavy rainfall → Beach water becomes unsafe
-```{=html}
-</div>
-```
-
-```{=html}
-<div style="font-size: 80%;">
-```
-**Many beaches are not always safe for swimming, especially after rain. **
-```{=html}
-</div>
-```
---- 
-
-## Recommendations & References
+## Recommendations & References {background-image="picture/beach4.jpg" background-size="cover" background-opacity="0.5"}
 
 **Recommendations:**
 
-- Increase testing frequency
+-   Increase testing frequency
 
-- Publish data publicly in real time
+-   Publish data publicly in real time
 
-- Post warning signs after rain
+-   Post warning signs after rain
 
-- Use forecast + data to build early warning systems
+-   Use forecast + data to build early warning systems
 
-**Key References:**
+**References:**
 
-- Wade et al. (2012)
+-   Wade et al. (2012)
 
-- Soller et al. (2010)
+-   Soller et al. (2010)
