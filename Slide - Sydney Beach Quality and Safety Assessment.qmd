@@ -50,13 +50,13 @@ library(gt)
 
 ## Executive Summary {background-image="picture/beach1.jpg" background-size="cover" background-opacity="0.5"}
 
--   Analyzed 10 years of Sydney beach data (2015–2025)\
+-   Analyzed 10 years of Sydney beach data (2015–2025)
 
--   Focused on **enterococci levels** (bacteria in water)\
+-   Focused on **enterococci levels** (bacteria in water)
 
--   Found **some beaches highly polluted**, especially Wentworth Falls Lake\
+-   Found **some beaches highly polluted**, especially Wentworth Falls Lake
 
--   **Rainfall strongly increases** bacteria levels\
+-   **Rainfall strongly increases** bacteria levels
 
 -   Urge for **real-time water quality monitoring** and public alerts
 
