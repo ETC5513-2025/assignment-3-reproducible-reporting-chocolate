@@ -26,7 +26,7 @@ I use `renv` to make the project reproducible. Please run:
 install.packages("renv")
 renv::restore()
 ```
-This will install the same packages we used.
+This will install the same packages I used.
 
 
 ## 📌 Project Summary
