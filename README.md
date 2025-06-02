@@ -7,7 +7,7 @@
 
 ## 📘 Introduction
 
-This project studies water quality at Sydney beaches. We used water and weather data to explore the relationship between rainfall and enterococci levels.
+This project studies water quality at Sydney beaches. I used water and weather data to explore the relationship between rainfall and enterococci levels.
 
 
 ## 🧪 Tools and Packages Used
@@ -31,4 +31,4 @@ This will install the same packages I used.
 
 ## 📌 Project Summary
 
-Our findings show that some beaches are unsafe in Sydney. And heavy rain increases enterococci levels. I recommend avoiding swimming after strong rain.
+My findings show that some beaches are unsafe in Sydney. And heavy rain increases enterococci levels. I recommend avoiding swimming after strong rain.
