@@ -239,27 +239,57 @@
 \end{Highlighting}
 \end{Shaded}
 
-The dataset utilized in this analysis originates from the TidyTuesday
-project, specifically the release dated May 20, 2025. It encompasses two
-primary components:
+The dataset utilized in this analysis originates from the
+\href{https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-20/readme.md}{TidyTuesday
+project}, specifically the release dated May 20, 2025. It encompasses
+two primary components:
 
 \begin{itemize}
 \tightlist
 \item
-  Water Quality Data
+  \textbf{Water Quality Data (water\_quality.csv)}
 \end{itemize}
 
 This dataset comprises measurements of enterococci levels, expressed in
-colony-forming units per 100 milliliters (CFU/100ml), collected from
-various beaches across New South Wales, Australia.
+colony-forming units per 100 milliliters (CFU/100ml). It collected from
+various beaches across New South Wales, Australia. Enterococci are
+commonly used as indicators of fecal contamination in water.
+
+Key variables include:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  swim\_site: Name of beach/swimming location
+\item
+  enterococci\_cfu\_100ml: Enterococci bacteria levels in colony forming
+  units (CFU) per 100 millilitres of water
+\item
+  date
+\end{enumerate}
 
 \begin{itemize}
 \tightlist
 \item
-  Weather Data
+  \textbf{Weather Data (weather.csv)}
 \end{itemize}
 
 This dataset includes meteorological information.
+
+Key variables include:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  date
+\item
+  precipitation\_mm: Rainfall in millimetres
+\end{enumerate}
+
+Both datasets can be merged using date to analyze relationships between
+weather conditions and water quality.
 
 \subsection{Executive Summary}\label{executive-summary}
 

@@ -144,15 +144,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;=</span> start_date <span class="sc">&amp;</span> date <span class="sc">&lt;=</span> end_date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The dataset utilized in this analysis originates from the TidyTuesday project, specifically the release dated May 20, 2025. It encompasses two primary components:</p>
+<p>The dataset utilized in this analysis originates from the <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-20/readme.md">TidyTuesday project</a>, specifically the release dated May 20, 2025. It encompasses two primary components:</p>
 <ul>
-<li>Water Quality Data</li>
+<li><strong>Water Quality Data (water_quality.csv)</strong></li>
 </ul>
-<p>This dataset comprises measurements of enterococci levels, expressed in colony-forming units per 100 milliliters (CFU/100ml), collected from various beaches across New South Wales, Australia.</p>
+<p>This dataset comprises measurements of enterococci levels, expressed in colony-forming units per 100 milliliters (CFU/100ml). It collected from various beaches across New South Wales, Australia. Enterococci are commonly used as indicators of fecal contamination in water.</p>
+<p>Key variables include:</p>
+<ol type="a">
+<li>swim_site: Name of beach/swimming location</li>
+<li>enterococci_cfu_100ml: Enterococci bacteria levels in colony forming units (CFU) per 100 millilitres of water</li>
+<li>date</li>
+</ol>
 <ul>
-<li>Weather Data</li>
+<li><strong>Weather Data (weather.csv)</strong></li>
 </ul>
 <p>This dataset includes meteorological information.</p>
+<p>Key variables include:</p>
+<ol type="a">
+<li>date</li>
+<li>precipitation_mm: Rainfall in millimetres</li>
+</ol>
+<p>Both datasets can be merged using date to analyze relationships between weather conditions and water quality.</p>
 </section>
 <section id="executive-summary" class="level2">
 <h2 class="anchored" data-anchor-id="executive-summary">Executive Summary</h2>

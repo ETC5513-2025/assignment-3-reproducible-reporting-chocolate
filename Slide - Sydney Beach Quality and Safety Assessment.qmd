@@ -161,7 +161,7 @@ ggplot(top_beaches, aes(x = reorder(swim_site, avg_enterococci),
   geom_col() +  
   
   scale_fill_viridis(discrete = TRUE, 
-                     option = "B", 
+                     option = "D", 
                      direction = -1) +  
   
   coord_flip() +
